@@ -4,6 +4,7 @@ const Formulario = () => {
 
     const [fruta, setFruta] = React.useState('')
     const [descripcion, setDescripcion] = React.useState('')
+    const [lista, setLista] = React.useState([])
 
     const guardarDatos = (e) => {
         e.preventDefault() // nao executar o metodo get na url (?)
@@ -19,6 +20,11 @@ const Formulario = () => {
         }
 
         console.log('procesando datos...' + fruta + descripcion) //validar datos del formulario
+
+        setLista([
+            ...lista,
+            {nombrefruta: fruta, nombredescripcion: descripcion}
+        ])
 
         e.target.reset()  // limpiando os campos do formulario apos escrever
 
@@ -46,6 +52,16 @@ const Formulario = () => {
                 />
                 <button className="btn btn-primary btn-block" type="submit">Agregar</button>
             </form>
+
+            <ul>
+                {
+                    lista.map((item, index) => (
+                        <li key={index}>
+                            {item.nombrefruta} - {item.nombredescripcion}
+                        </li>
+                    ))
+                }
+            </ul>
         </div>
     )
 }
